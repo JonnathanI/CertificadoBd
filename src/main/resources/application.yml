@@ -1,0 +1,31 @@
+# Configuración del servidor
+server:
+  port: 8081
+  error:
+    include-message: always
+
+# Configuración de Spring
+spring:
+  # Configuración de migración de base de datos con Flyway
+  flyway:
+    enabled: true
+    baselineVersion: 1
+    locations:
+      classpath: db/migration
+    sqlMigrationSuffixes: .sql
+    baselineOnMigrate: true
+    sqlMigrationPrefix: V
+    schemas: public
+
+  datasource:
+    url: jdbc:postgresql://kala.db.elephantsql.com:5432/iubiolmd?socketTimeout=3
+    username: iubiolmd
+    password: sJ9WELvE2wCYMrPrXPqa11jVNSIVAU8X
+    driverClassName: org.postgresql.Driver
+
+
+# Configuración de Cloudinary
+cloudinary:
+  cloud_name: de95r2oqx
+  api_key: 987292596382878
+  api_secret: EmJpBeOijG9uTDKUrnb5X1zveKQ
