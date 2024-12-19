@@ -14,7 +14,7 @@ class Certificate {
     var date: String? = null
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "trainer_id")
-    var trainer: Trainer? = null
+    @JoinColumn(name = "course_id")
+    var course:Course? = null
 
 }

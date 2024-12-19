@@ -11,7 +11,6 @@ class Students {
     var id: Long? = null
     var name: String? = null
     var dni: String? = null
-    var rol: String? = null
 
 
 }
