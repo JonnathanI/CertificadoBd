@@ -89,24 +89,24 @@ class StudentsController {
         return ResponseEntity("Estudiante Eliminado", HttpStatus.OK)
     }
 
-    @GetMapping("/student-details/{dni}")
-    fun getStudentWithCourses(@PathVariable dni: String): ResponseEntity<Any> {
-        val student = studentsService.findByDni(dni)
-        if (student == null) {
-            return ResponseEntity("Estudiante no encontrado", HttpStatus.NOT_FOUND)
+        @GetMapping("/student-details/{dni}")
+        fun getStudentWithCourses(@PathVariable dni: String): ResponseEntity<Any> {
+            val student = studentsService.findByDni(dni)
+            if (student == null) {
+                return ResponseEntity("Estudiante no encontrado", HttpStatus.NOT_FOUND)
+            }
+
+            // Obtener los cursos relacionados con el estudiante
+            val courses = courseService.getCoursesByStudent(dni)
+
+            // Responder con los detalles del estudiante y los cursos
+            val response = mapOf(
+                "student" to student,
+                "courses" to courses
+            )
+
+            return ResponseEntity.ok(response)
         }
-
-        // Obtener los cursos relacionados con el estudiante
-        val courses = courseService.getCoursesByStudent(dni)
-
-        // Responder con los detalles del estudiante y los cursos
-        val response = mapOf(
-            "student" to student,
-            "courses" to courses
-        )
-
-        return ResponseEntity.ok(response)
-    }
 
 }
 

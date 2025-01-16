@@ -1,14 +1,28 @@
-# Utiliza una imagen base con Java
+# Usar una imagen base de OpenJDK
 FROM openjdk:17-jdk-slim
 
-# Establece el directorio de trabajo en la imagen
+# Establecer el directorio de trabajo
 WORKDIR /app
 
-# Copia el archivo JAR generado en el contenedor
-COPY target/backend-0.0.1-SNAPSHOT.jar app.jar
+# Copiar el Maven Wrapper y sus archivos
+COPY .mvn/ .mvn/
+COPY mvnw .
+COPY pom.xml .
 
-# Expone el puerto 8081 (o el que uses en Spring Boot)
-EXPOSE 8081
+# Hacer ejecutable el script de Maven Wrapper
+RUN chmod +x ./mvnw
+
+# Descargar dependencias sin compilar el proyecto
+RUN ./mvnw dependency:go-offline -B
+
+# Copiar el resto del código fuente
+COPY src ./src
+
+# Construir el proyecto
+RUN ./mvnw clean package -DskipTests
+
+# Copiar el JAR generado
+COPY target/*.jar app.jar
 
 # Comando para ejecutar la aplicación
-ENTRYPOINT ["java", "-jar", "app.jar"]
+CMD ["java", "-jar", "app.jar"]

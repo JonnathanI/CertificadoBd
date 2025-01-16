@@ -1,0 +1,15 @@
+services:
+  wait-for-elephant-sql:
+    image: 'alpine:latest'
+    entrypoint: ['sh', '-c', 'echo "Esperando a ElephantSQL..." && sleep 10']
+
+  backend:
+    build:
+      context: .
+    depends_on:
+      - wait-for-elephant-sql
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+    ports:
+      - "8081:8081"
+    command: ["./mvnw", "spring-boot:run"]

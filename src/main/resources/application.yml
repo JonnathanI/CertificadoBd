@@ -18,11 +18,10 @@ spring:
     schemas: public
 
   datasource:
-    url: jdbc:postgresql://kala.db.elephantsql.com:5432/iubiolmd?socketTimeout=3
-    username: iubiolmd
-    password: sJ9WELvE2wCYMrPrXPqa11jVNSIVAU8X
+    url: jdbc:postgresql://ep-twilight-voice-a8h4m37h.eastus2.azure.neon.tech:5432/BackCer?sslmode=require
+    username: BackCer_owner
+    password: rDHebOujcX21
     driverClassName: org.postgresql.Driver
-
 
 # Configuración de Cloudinary
 cloudinary:
