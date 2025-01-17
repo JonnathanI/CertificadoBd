@@ -1,27 +1,25 @@
-# Usar una imagen base de OpenJDK
 FROM openjdk:17-jdk-slim
 
-# Establecer el directorio de trabajo
+# Establece el directorio de trabajo
 WORKDIR /app
 
-# Copiar el Maven Wrapper y sus archivos
-COPY .mvn/ .mvn/
+# Copia los archivos necesarios para ejecutar Maven Wrapper
 COPY mvnw .
 COPY pom.xml .
 
-# Hacer ejecutable el script de Maven Wrapper
+# Da permisos de ejecución al archivo mvnw
 RUN chmod +x ./mvnw
 
-# Descargar dependencias sin compilar el proyecto
-RUN ./mvnw dependency:go-offline -B
+# Copia todo el contenido del proyecto
+COPY . .
 
-# Copiar el resto del código fuente
-COPY src ./src
-
-# Construir el proyecto
+# Compila y construye la aplicación
 RUN ./mvnw clean package -DskipTests
 
-# Copiar el JAR generado
+# Expone el puerto 8083
+EXPOSE 8083
+
+# Copia el archivo JAR final para ejecutarlo
 COPY target/*.jar app.jar
 
 # Comando para ejecutar la aplicación
