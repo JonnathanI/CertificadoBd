@@ -29,11 +29,13 @@ class SecurityConfig {
             .authorizeHttpRequests { authRequest ->
                 authRequest
                     .requestMatchers("/auth/**").permitAll()
+                    .requestMatchers("/api/certificado/**").permitAll()
+                    .requestMatchers("/student/student-details/**").permitAll()
                     .requestMatchers("/course/**").hasAnyRole("admin","stud","train")
                     .requestMatchers("/certificate/**").hasAnyRole("admin","train")
                     .requestMatchers("/student/**").hasAnyRole("admin")
                     .requestMatchers("/trainer/**").hasAnyRole("admin")
-                    .requestMatchers("/api/certificado/** ").hasAnyRole("admin")
+                   // .requestMatchers("/api/certificado/** ").hasAnyRole("admin")
                     .requestMatchers("/import/**").hasAnyRole("admin")
 
 
