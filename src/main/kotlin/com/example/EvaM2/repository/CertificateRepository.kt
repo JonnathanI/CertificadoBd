@@ -8,5 +8,5 @@ import java.util.*
 @Repository
 interface CertificateRepository: JpaRepository<Certificate, Long>{
     fun findById(id: Long?): Certificate?
-
+    fun findByCourseId(courseId: Long): Certificate?
 }

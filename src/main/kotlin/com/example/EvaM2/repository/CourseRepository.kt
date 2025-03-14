@@ -16,5 +16,5 @@ interface CourseRepository: JpaRepository<Course, Long> {
     // Método para buscar los cursos por el DNI del estudiante y el nombre del curso
     fun findByStudents_DniAndNameContaining(dni: String, courseName: String): List<Course>?
     fun findByStudentsDni(dni: String): List<Course>
-    fun findByStudentsDni(dni: String): List<Course>
+
 }
